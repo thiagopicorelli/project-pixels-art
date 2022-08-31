@@ -1,3 +1,5 @@
+// Palette
+
 const palette = document.getElementById('color-palette');
 const paletteBlocks = palette.children;
 let selectedColor = 0;
@@ -68,6 +70,8 @@ for (let i = 0; i < paletteBlocks.length; i += 1) {
   });
 }
 
+// Pixel Board
+
 let pixelBoard = [];
 
 function createBoard() {
@@ -82,7 +86,7 @@ function createBoard() {
     for (let j = 0; j < 5; j += 1) {
       const newPixel = document.createElement('div');
       newPixel.className = 'pixel';
-      newPixel.pos = 5*i + j;
+      newPixel.pos = 5 * i + j;
       newPixel.style.backgroundColor = pixelBoard[newPixel.pos];
       board.appendChild(newPixel);
     }
@@ -91,17 +95,29 @@ function createBoard() {
   }
 }
 
+createBoard();
+const pixelBoardView = document.getElementsByClassName('pixel');
+
 function updatePixel(pos) {
   pixelBoardView[pos].style.backgroundColor = paletteBlocks[selectedColor].style.backgroundColor;
   pixelBoard[pos] = pixelBoardView[pos].style.backgroundColor;
   localStorage.pixelBoard = JSON.stringify(pixelBoard);
 }
 
-createBoard();
-const pixelBoardView = document.getElementsByClassName('pixel');
-
 for (let i = 0; i < pixelBoardView.length; i += 1) {
   pixelBoardView[i].addEventListener('click', (event) => {
     updatePixel(event.target.pos);
   });
 }
+
+function clearBoard() {
+  pixelBoard = Array(25).fill('white');
+  for (let i = 0; i < 25; i += 1) {
+    pixelBoardView[i].style.backgroundColor = 'white';
+  }
+
+  localStorage.pixelBoard = JSON.stringify(pixelBoard);
+}
+
+const clearButton = document.getElementById('clear-board');
+clearButton.addEventListener('click', clearBoard);
