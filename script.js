@@ -35,16 +35,16 @@ function createPalette() {
   }
   palette.firstElementChild.style.backgroundColor = 'black';
 
-  if (localStorage.colors === undefined) {
-    localStorage.colors = JSON.stringify(getRandomColors());
+  if (localStorage.colorPalette === undefined) {
+    localStorage.colorPalette = JSON.stringify(getRandomColors());
   }
-  const colors = JSON.parse(localStorage.colors);
+  const colors = JSON.parse(localStorage.colorPalette);
   setPalette(colors);
 }
 
 function randomizePalette() {
   const colors = getRandomColors();
-  localStorage.colors = JSON.stringify(colors);
+  localStorage.colorPalette = JSON.stringify(colors);
   setPalette(colors);
 }
 
