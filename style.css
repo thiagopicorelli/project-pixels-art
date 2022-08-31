@@ -10,7 +10,7 @@ body {
 }
 
 .selected {
-  border-color: red;
+  border-radius: 50%;
 }
 
 .pixel {
