@@ -68,13 +68,22 @@ for (let i = 0; i < paletteBlocks.length; i += 1) {
   });
 }
 
-function createBoardView() {
+let pixelBoard = [];
+
+function createBoard() {
+  if (localStorage.pixelBoard === undefined) {
+    localStorage.pixelBoard = JSON.stringify(Array(25).fill('white'));
+  }
+
+  pixelBoard = JSON.parse(localStorage.pixelBoard);
+
   const board = document.getElementById('pixel-board');
   for (let i = 0; i < 5; i += 1) {
     for (let j = 0; j < 5; j += 1) {
       const newPixel = document.createElement('div');
       newPixel.className = 'pixel';
       newPixel.pos = 5*i + j;
+      newPixel.style.backgroundColor = pixelBoard[newPixel.pos];
       board.appendChild(newPixel);
     }
 
@@ -82,11 +91,17 @@ function createBoardView() {
   }
 }
 
-createBoardView();
+function updatePixel(pos) {
+  pixelBoardView[pos].style.backgroundColor = paletteBlocks[selectedColor].style.backgroundColor;
+  pixelBoard[pos] = pixelBoardView[pos].style.backgroundColor;
+  localStorage.pixelBoard = JSON.stringify(pixelBoard);
+}
+
+createBoard();
 const pixelBoardView = document.getElementsByClassName('pixel');
 
 for (let i = 0; i < pixelBoardView.length; i += 1) {
   pixelBoardView[i].addEventListener('click', (event) => {
-    pixelBoardView[event.target.pos].style.backgroundColor = paletteBlocks[selectedColor].style.backgroundColor;
+    updatePixel(event.target.pos);
   });
 }
