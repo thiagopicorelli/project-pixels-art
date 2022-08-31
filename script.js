@@ -49,11 +49,21 @@ function randomizePalette() {
 }
 
 createPalette();
-
 const randomButton = document.getElementById('button-random-color');
 randomButton.addEventListener('click', randomizePalette);
 
 function createBoard() {
+  const board = document.getElementById('pixel-board');
   
+  for (let i = 0; i < 5; i += 1) {
+    for (let j = 0; j < 5; j += 1) {
+      const newPixel = document.createElement('div');
+      newPixel.className = 'pixel';
+      board.appendChild(newPixel);
+    }
 
+    board.appendChild(document.createElement('br'));
+  }
 }
+
+createBoard();
