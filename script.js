@@ -34,6 +34,7 @@ function createPalette() {
     palette.appendChild(newColor);
   }
   palette.firstElementChild.style.backgroundColor = 'black';
+  palette.firstElementChild.className = 'color selected';
 
   if (localStorage.colorPalette === undefined) {
     localStorage.colorPalette = JSON.stringify(getRandomColors());

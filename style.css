@@ -9,6 +9,10 @@ body {
   border: 1px solid black;
 }
 
+.selected {
+  border-color: red;
+}
+
 .pixel {
   display: inline-block;
   background-color: white;
@@ -16,3 +20,4 @@ body {
   height: 40px;
   border: 1px solid black;
 }
+
