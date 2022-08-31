@@ -52,3 +52,8 @@ createPalette();
 
 const randomButton = document.getElementById('button-random-color');
 randomButton.addEventListener('click', randomizePalette);
+
+function createBoard() {
+  
+
+}
