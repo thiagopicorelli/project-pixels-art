@@ -72,47 +72,55 @@ for (let i = 0; i < paletteBlocks.length; i += 1) {
 
 // Pixel Board
 
-let pixelBoard = [];
-
-function createBoard() {
-  if (localStorage.pixelBoard === undefined) {
-    localStorage.pixelBoard = JSON.stringify(Array(25).fill('white'));
+function loadBoardSize() {
+  if (localStorage.boardSize === undefined) {
+    localStorage.boardSize = 5;
   }
 
-  pixelBoard = JSON.parse(localStorage.pixelBoard);
+  document.getElementById('board-size').value = localStorage.boardSize;
+  return localStorage.boardSize;
+}
 
-  const board = document.getElementById('pixel-board');
-  for (let i = 0; i < 5; i += 1) {
-    for (let j = 0; j < 5; j += 1) {
+function loadPixelBoard(boardSize) {
+  if (localStorage.pixelBoard === undefined || localStorage.pixelBoard.length === 0) {
+    localStorage.pixelBoard = JSON.stringify(Array(boardSize ** 2).fill('white'));
+  }
+  return JSON.parse(localStorage.pixelBoard);
+}
+
+let boardSize = loadBoardSize();
+let pixelBoard = loadPixelBoard(boardSize);
+const board = document.getElementById('pixel-board');
+
+function updatePixel(event) {
+  const newPixel = event.target;
+  newPixel.style.backgroundColor = paletteBlocks[selectedColor].style.backgroundColor;
+  pixelBoard[newPixel.pos] = newPixel.style.backgroundColor;
+  localStorage.pixelBoard = JSON.stringify(pixelBoard);
+}
+
+function createBoard() {
+  for (let i = 0; i < boardSize; i += 1) {
+    for (let j = 0; j < boardSize; j += 1) {
       const newPixel = document.createElement('div');
       newPixel.className = 'pixel';
-      newPixel.pos = 5 * i + j;
+      newPixel.pos = boardSize * i + j;
       newPixel.style.backgroundColor = pixelBoard[newPixel.pos];
       board.appendChild(newPixel);
+      newPixel.addEventListener('click', updatePixel);
     }
-
     board.appendChild(document.createElement('br'));
   }
 }
 
 createBoard();
-const pixelBoardView = document.getElementsByClassName('pixel');
-
-function updatePixel(pos) {
-  pixelBoardView[pos].style.backgroundColor = paletteBlocks[selectedColor].style.backgroundColor;
-  pixelBoard[pos] = pixelBoardView[pos].style.backgroundColor;
-  localStorage.pixelBoard = JSON.stringify(pixelBoard);
-}
-
-for (let i = 0; i < pixelBoardView.length; i += 1) {
-  pixelBoardView[i].addEventListener('click', (event) => {
-    updatePixel(event.target.pos);
-  });
-}
 
 function clearBoard() {
-  pixelBoard = Array(25).fill('white');
-  for (let i = 0; i < 25; i += 1) {
+  const pixelBoardView = document.getElementsByClassName('pixel');
+  const area = boardSize ** 2;
+
+  pixelBoard = Array(area).fill('white');
+  for (let i = 0; i < area; i += 1) {
     pixelBoardView[i].style.backgroundColor = 'white';
   }
 
@@ -121,3 +129,26 @@ function clearBoard() {
 
 const clearButton = document.getElementById('clear-board');
 clearButton.addEventListener('click', clearBoard);
+
+function changeBoardSize() {
+  const N = document.getElementById('board-size').value;
+
+  if (Number.isNaN(N)) {
+    return;
+  }
+
+  if (N <= 0) {
+    return;
+  }
+
+  localStorage.boardSize = N;
+  boardSize = N;
+  localStorage.pixelBoard = [];
+  pixelBoard = loadPixelBoard(boardSize);
+  board.innerHTML = '';
+
+  createBoard();
+}
+
+const changeButton = document.getElementById('generate-board');
+changeButton.addEventListener('click', changeBoardSize);
