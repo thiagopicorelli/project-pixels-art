@@ -68,12 +68,13 @@ for (let i = 0; i < paletteBlocks.length; i += 1) {
   });
 }
 
-function createBoard() {
+function createBoardView() {
   const board = document.getElementById('pixel-board');
   for (let i = 0; i < 5; i += 1) {
     for (let j = 0; j < 5; j += 1) {
       const newPixel = document.createElement('div');
       newPixel.className = 'pixel';
+      newPixel.pos = 5*i + j;
       board.appendChild(newPixel);
     }
 
@@ -81,4 +82,11 @@ function createBoard() {
   }
 }
 
-createBoard();
+createBoardView();
+const pixelBoardView = document.getElementsByClassName('pixel');
+
+for (let i = 0; i < pixelBoardView.length; i += 1) {
+  pixelBoardView[i].addEventListener('click', (event) => {
+    pixelBoardView[event.target.pos].style.backgroundColor = paletteBlocks[selectedColor].style.backgroundColor;
+  });
+}
