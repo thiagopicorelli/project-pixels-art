@@ -7,7 +7,15 @@ function addColor(color) {
   palette.appendChild(newColor);
 }
 
-addColor('black');
-addColor('red');
-addColor('green');
-addColor('blue');
+function createPalette() {
+  if(localStorage.colors === undefined)
+    localStorage.colors = JSON.stringify(['red', 'green', 'blue']);
+
+  let colors = JSON.parse(localStorage.colors);
+
+  addColor('black');
+  for(let color of colors)
+    addColor(color);
+}
+
+createPalette();
