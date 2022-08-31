@@ -8,14 +8,16 @@ function addColor(color) {
 }
 
 function createPalette() {
-  if(localStorage.colors === undefined)
+  if (localStorage.colors === undefined) {
     localStorage.colors = JSON.stringify(['red', 'green', 'blue']);
+  }
 
-  let colors = JSON.parse(localStorage.colors);
+  const colors = JSON.parse(localStorage.colors);
 
   addColor('black');
-  for(let color of colors)
-    addColor(color);
+  for (let i = 0; i < colors.length; i += 1) {
+    addColor(colors[i]);
+  }
 }
 
 createPalette();
