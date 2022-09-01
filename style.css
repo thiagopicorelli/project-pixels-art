@@ -1,5 +1,23 @@
+@font-face {
+  font-family: "Pixeloid Font Bold";
+  src: url("/font/PixeloidSansBold-RpeJo.ttf");
+}
+
+@font-face {
+  font-family: "Pixeloid Font";
+  src: url("/font/PixeloidSans-nR3g1.ttf");
+}
+
 body {
   text-align: center;
+}
+
+h1 {
+  font-family: "Pixeloid Font Bold";
+}
+
+button {
+  font-family: "Pixeloid Font";
 }
 
 .color {
