@@ -1,16 +1,16 @@
 @font-face {
-  font-family: "Pixeloid Font Bold";
-  src: url("/font/PixeloidSansBold-RpeJo.ttf");
+  font-family: Pixeloid Font Boldd;
+  src: url('/font/PixeloidSansBold-RpeJo.ttf');
 }
 
 @font-face {
-  font-family: "Pixeloid Font";
-  src: url("/font/PixeloidSans-nR3g1.ttf");
+  font-family: Pixeloid Font;
+  src: url('/font/PixeloidSans-nR3g1.ttf');
 }
 
 body {
   text-align: center;
-  background-image: url("https://opengameart.org/sites/default/files/parallax-mountain-animX1.gif");
+  background-image: url('https://opengameart.org/sites/default/files/parallax-mountain-animX1.gif');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -24,11 +24,11 @@ content {
 }
 
 h1 {
-  font-family: "Pixeloid Font Bold";
+  font-family: Pixeloid Font Boldd, sans-serif;
 }
 
-button, input {
-  font-family: "Pixeloid Font";
+button , input {
+  font-family: Pixeloid Font, sans-serif;
 }
 
 .color {
