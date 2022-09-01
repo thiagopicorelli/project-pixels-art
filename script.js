@@ -77,7 +77,6 @@ function loadBoardSize() {
     localStorage.boardSize = 5;
   }
 
-  document.getElementById('board-size').value = localStorage.boardSize;
   return localStorage.boardSize;
 }
 
@@ -132,6 +131,12 @@ clearButton.addEventListener('click', clearBoard);
 
 function getBoardSize() {
   let N = document.getElementById('board-size').value;
+  if (N.length === 0) {
+    alert('Board inválido!');
+  }
+  if (Number.isNaN(N)) {
+    return undefined;
+  }
   if (N < 5) {
     N = 5;
   } else if (N > 50) {
@@ -142,14 +147,7 @@ function getBoardSize() {
 
 function changeBoardSize() {
   const N = getBoardSize();
-  if (N.length === 0) {
-    alert('Board inválido!');
-    return;
-  }
-  if (Number.isNaN(N)) {
-    return;
-  }
-  if (N < 0) {
+  if (N === undefined) {
     return;
   }
   localStorage.boardSize = N;
