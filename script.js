@@ -130,30 +130,33 @@ function clearBoard() {
 const clearButton = document.getElementById('clear-board');
 clearButton.addEventListener('click', clearBoard);
 
-function changeBoardSize() {
+function getBoardSize() {
   let N = document.getElementById('board-size').value;
+  if (N < 5) {
+    N = 5;
+  } else if (N > 50) {
+    N = 50;
+  }
+  return N;
+}
 
+function changeBoardSize() {
+  const N = getBoardSize();
+  if (N.length === 0) {
+    alert('Board inválido!');
+    return;
+  }
   if (Number.isNaN(N)) {
     return;
   }
-
   if (N < 0) {
     return;
   }
-
-  if (N < 5) {
-    N = 5;
-  }
-  else if (N > 50) {
-    N = 50;
-  }
-
   localStorage.boardSize = N;
   boardSize = N;
   localStorage.pixelBoard = [];
   pixelBoard = loadPixelBoard(boardSize);
   board.innerHTML = '';
-
   createBoard();
 }
 
