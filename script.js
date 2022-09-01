@@ -92,10 +92,12 @@ let pixelBoard = loadPixelBoard(boardSize);
 const board = document.getElementById('pixel-board');
 
 function updatePixel(event) {
-  const newPixel = event.target;
-  newPixel.style.backgroundColor = paletteBlocks[selectedColor].style.backgroundColor;
-  pixelBoard[newPixel.pos] = newPixel.style.backgroundColor;
-  localStorage.pixelBoard = JSON.stringify(pixelBoard);
+  if (event.buttons === 1) {
+    const newPixel = event.target;
+    newPixel.style.backgroundColor = paletteBlocks[selectedColor].style.backgroundColor;
+    pixelBoard[newPixel.pos] = newPixel.style.backgroundColor;
+    localStorage.pixelBoard = JSON.stringify(pixelBoard);
+  }
 }
 
 function createBoard() {
@@ -106,7 +108,8 @@ function createBoard() {
       newPixel.pos = boardSize * i + j;
       newPixel.style.backgroundColor = pixelBoard[newPixel.pos];
       board.appendChild(newPixel);
-      newPixel.addEventListener('click', updatePixel);
+      newPixel.addEventListener('mousedown', updatePixel);
+      newPixel.addEventListener('mouseover', updatePixel);
     }
     board.appendChild(document.createElement('br'));
   }
