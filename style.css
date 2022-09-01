@@ -16,8 +16,12 @@ h1 {
   font-family: "Pixeloid Font Bold";
 }
 
-button {
+button, input {
   font-family: "Pixeloid Font";
+}
+
+#board-size {
+  width: 3em;
 }
 
 .color {
