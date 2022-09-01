@@ -131,14 +131,21 @@ const clearButton = document.getElementById('clear-board');
 clearButton.addEventListener('click', clearBoard);
 
 function changeBoardSize() {
-  const N = document.getElementById('board-size').value;
+  let N = document.getElementById('board-size').value;
 
   if (Number.isNaN(N)) {
     return;
   }
 
-  if (N <= 0) {
+  if (N < 0) {
     return;
+  }
+
+  if (N < 5) {
+    N = 5;
+  }
+  else if (N > 50) {
+    N = 50;
   }
 
   localStorage.boardSize = N;
