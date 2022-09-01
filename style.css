@@ -20,10 +20,6 @@ button, input {
   font-family: "Pixeloid Font";
 }
 
-#board-size {
-  width: 3em;
-}
-
 .color {
   display: inline-block;
   width: 50px;
@@ -33,6 +29,15 @@ button, input {
 
 .selected {
   border-radius: 50%;
+}
+
+#board-size {
+  width: 3em;
+}
+
+#pixel-board {
+  display: inline-block;
+  border: 5px solid black;
 }
 
 .pixel {
